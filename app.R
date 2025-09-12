@@ -1,5 +1,5 @@
 library(shiny)
-source("sim_sesoi_funs.R")
+source("powertargets_funs.R")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
