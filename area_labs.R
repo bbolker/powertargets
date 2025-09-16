@@ -23,4 +23,4 @@ dpos <- bb |>
   do.call(what = rbind)
 dpos$label <- levels(dd$g)
   
-gg0 + geom_label(data = dpos, aes(x, y, label), fill = NA)
+gg0 + geom_label(data = dpos, mapping = aes(x, y, label = label), fill = "white")
