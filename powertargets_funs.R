@@ -149,15 +149,15 @@ plotfun <- function(x, expand = 0.05, stack = FALSE) {
       scale_y_continuous(expand = c(0,0)) +
       out_fill_scale
     )
-    ret <- gg1
     ## direct labeling: not quite working yet
-      ##
-      bb <- ggplot_build(gg1)$data[[1]]
-      posfun <- function(dd) {
+    ##  (label positions switched?)
+    bb <- ggplot_build(gg1)$data[[1]]
+    posfun <- function(dd) {
         with(dd, {
           ## which.max picks *first* element if there are repeats
-          ## we want the middle element
-          w <- round(mean(which(ymax-ymin == max(ymax-ymin)), na.rm = TRUE))
+          ## we want (somewhere near) the middle element
+          w <- round(mean(which(ymax-ymin > (0.8*max(ymax-ymin))),
+                          na.rm = TRUE))
           data.frame(g = group[1], x = x[w], y = (ymin[w] + ymax[w])/2)
         })
       }
