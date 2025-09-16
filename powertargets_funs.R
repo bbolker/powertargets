@@ -36,6 +36,15 @@ f_lengthen <- function(x, nvec) {
   )
 }
 
+nsimfun <- function(nvec, ...) {
+  L <- list(...)
+  tmpf <- function(n) do.call(tabfun, c(list(n = n), L))
+  (lapply(nvec, tmpf)
+    |> do.call(what=rbind)
+    |> f_lengthen(nvec)
+  )
+}
+
 ## should be able to do this much faster if we're sticking to equal-sample size, etc. etc. etc.?
 
 ## how many cases should we distinguish?
@@ -102,34 +111,67 @@ tabfun <- function(..., s = 1, nsim = 10, fast = TRUE) {
 }
 
 
+## Okabe-Ito minus black and yellow
 oi3 <- palette.colors(9)[-c(1, 5)]
-out_scale <- ggplot2::scale_colour_manual(name = "outcome category",
-                                          values = oi3)
+out_colour_scale <- ggplot2::scale_colour_manual(name = "outcome category",
+                                                 values = oi3)
+out_fill_scale <- ggplot2::scale_fill_manual(name = "outcome category",
+                                             values = oi3)
 
+#' @examples
+#' set.seed(101)
+#' nvec <- c(5:10, (2:9)*10, 100, 200)
+#' sim1 <- nsimfun(nvec, delta = 0.5, nsim = 10000)
+#' plotfun(sim1)
+#' plotfun(sim1, stack = TRUE)
+#' ## FIXME: colour/fill orders don't match?
 plotfun <- function(x, expand = 0.05, stack = FALSE) {
-  ## Okabe-Ito minus black and yellow
   stopifnot(require("ggplot2"))
   stopifnot(require("directlabels"))
   gg0 <- ggplot(x, aes(n, value)) +
     scale_x_log10() +
-    labs(y = "proportion", x = "sample size per group") +
-    out_scale
-  ret <- if (!stack) {
+    labs(y = "proportion", x = "sample size per group")
+  if (!stack) {
     gg1 <- gg0 +
       geom_line(aes(colour = name)) +
       geom_point(aes(colour = name))  +
+      out_colour_scale +
       expand_limits(y = 1 + expand)  ## make room for labels
     ## see https://tdhock.github.io/directlabels/docs/index.html
     ##  for direct labeling choices
-    direct.label(gg1, "top.bumptwice")
+    ret <- direct.label(gg1, "top.bumptwice")
   } else {
     ## suppress 'scale for x is already present'
-    suppressMessages(
+    gg1 <- suppressMessages(
       gg0 + geom_area(aes(fill = name), position = "stack",
                       colour = NA) +
-        scale_x_continuous(expand = c(0,0)) +
-        scale_y_continuous(expand = c(0,0))
+      scale_x_continuous(expand = c(0,0)) +
+      scale_y_continuous(expand = c(0,0)) +
+      out_fill_scale
     )
+    ret <- gg1
+    ## direct labeling: not quite working yet
+      ##
+      bb <- ggplot_build(gg1)$data[[1]]
+      posfun <- function(dd) {
+        with(dd, {
+          ## which.max picks *first* element if there are repeats
+          ## we want the middle element
+          w <- round(mean(which(ymax-ymin == max(ymax-ymin)), na.rm = TRUE))
+          data.frame(g = group[1], x = x[w], y = (ymin[w] + ymax[w])/2)
+        })
+      }
+      dpos <- bb |>
+        split(bb$group) |>
+        lapply(posfun) |>
+        do.call(what = rbind)
+    dpos$label <- levels(x$name)[dpos$g]
+    dpos$name <- levels(x$name)[dpos$g]
+    ret <- gg1 +
+      geom_label(data = dpos,
+                 mapping = aes(x, y, label = label, colour=name),
+                 fill = "white") +
+      out_colour_scale
   }
   ret
 }
