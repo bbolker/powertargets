@@ -1,0 +1,11 @@
+Num	lwr	upr	Short	Mag/Sign	Long
+1	1	1	LN	large/negative	clearly large and negative
+2	1	2	N	unclear/negative	clearly negative
+3	1	3	xLP	unclear/unclear	NOT (large and positive)
+4	1	4	Z	unclear/unclear	completely unclear
+5	2	2	SN	small/negative	clearly small and negative
+6	2	3	S	small/unclear	clearly small
+7	2	4	xLN	unclear/unclear	NOT (large and negative)
+8	3	3	SP	small/positive	clearly small/positive
+9	3	4	P	unclear/positive	clearly positive
+10	4	4	LP	large/positive	clearly large and positive

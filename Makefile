@@ -1,13 +1,44 @@
-## This is powertargets
+## This is powertargets (manually forked from bbmisc/sesoi)
 
-## This section is for Dushoff-style vim-setup and vim targeting
-## You can delete it if you don't want it
 current: target
 -include target.mk
 Ignore = target.mk
 
 vim_session:
 	bash -cl "vmt"
+
+######################################################################
+
+## Clarity simulations
+
+Sources += *.R *.qmd *_notes.md
+Ignore += *.html
+
+autopipeR = defined
+
+Ignore += Rmisc/*.html
+Sources += $(wildcard Rmisc/*.*md Rmisc/*.R)
+
+shiny_powertargets:
+	Rscript --vanilla app.R
+
+powertargets.html: powertargets.qmd powertargets_funs.Rout
+	$(qr)
+
+## This is how you put things into a pipeR pipeline without updating them.
+powertargets_funs.Rout: powertargets_funs.R
+	$(wrapR)
+
+simfun2_test.Rout: simfun2_test.R powertargets_funs.Rout
+
+## claritySims.md
+## claritySims.Rout: claritySims.R clarityFuns.R
+claritySims.Rout: claritySims.R clarityFuns.rda categories.tsv
+	$(pipeR)
+
+######################################################################
+
+qr = quarto render $<
 
 ######################################################################
 
@@ -29,36 +60,7 @@ makestuff:
 
 -include makestuff/os.mk
 
-## -include makestuff/pipeR.mk
+-include makestuff/pipeR.mk
 
 -include makestuff/git.mk
 -include makestuff/visual.mk
-
-## Clarity simulations
-
-Sources += *.R *.qmd *_notes.md
-Ignore += *.html
-
-autopipeR = defined
-
-Ignore += Rmisc/*.html
-Sources += $(wildcard Rmisc/*.*md Rmisc/*.R)
-
-shiny_powertargets:
-	Rscript --vanilla app.R
-
-## Sources += powertargets.md ## Moved by Bolker 
-powertargets.html: powertargets.qmd powertargets_funs.Rout
-        $(qr)
-
-## This is how you put things into a pipeR pipeline without touching them.
-powertargets_funs.Rout: powertargets_funs.R
-        $(wrapR)
-
-simfun2_test.Rout: simfun2_test.R powertargets_funs.Rout
-
-## claritySims.md
-## claritySims.Rout: claritySims.R clarityFuns.R
-claritySims.Rout: claritySims.R clarityFuns.rda
-        $(pipeR)
-

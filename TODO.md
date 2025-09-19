@@ -1,3 +1,7 @@
+
+Clarity categories spreadsheet:
+* categories.tsv
+
 * American Statistician
   * sharing policy https://authorservices-taylorandfrancis-com.libaccess.lib.mcmaster.ca/research-impact/sharing-versions-of-journal-articles/ (US$3650 to publish open access; otherwise, can post to institutional repository (MacSphere) with a 12-month embargo for Sci/Tech/Medicine, 18 months for Soc Sci/Humanities
   * Not sure how MacSphere handles embargos
@@ -10,6 +14,8 @@
 
 * add titles to plots based on attributes (carrying info about parameters) ?
 * work on category labels/worry about opposite-sign results
+	* Start in clarityFuns.R
+	* Need code for merging categories
 * tweak stacked plot: ordering and position of direct labels, etc.
 * make comparisons with power for sign detection, equivalence, non-inferiority ...
 * Shiny app
@@ -17,3 +23,5 @@
     * smooth instead of line?
     * self-contained (no source()) ?
 * solve for n etc? (needs some thought about interface)
+
+

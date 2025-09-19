@@ -1,6 +1,9 @@
 library(shellpipes)
 library(readr)
 
+## This table is a subset of categories.tsv
+## have to think about function logic if we want to use that instead
+## This table wants to be implemented downstream of tabfun
 catTable <- read_csv(file="
 	lwr,upr,Short,Mag/Sign
 	1,1,LN,large/negative
@@ -50,25 +53,13 @@ levs <- c("large/clear sign",
 #' @param x a 3-element vector with 'lower' and 'upper' as the second and third elements
 #' @param s sesoi (critical value distinguishing small/large effect sizes)
 catfun <- function(x, s=1, refs=c(-1, 0, 1), levNames=NULL) {
+	 rowStart <- c(1, 4, 6, 7)
     lwr <- x[2]
     upr <- x[3]
 	 marks <- s*refs
 	 return(
-	 	c(1, 4, 6, 7)[1+sum(lwr>marks)] + sum(upr>marks)
+	 	rowStart[1+sum(lwr>marks)] + sum(upr>marks)
 	)
-}
-
-#' compute fractions in each category
-#' @param x a matrix-like object with columns 2 and 3 equal to lower/upper CIs
-proptest <- function(x, s = 1) {
-    lwr <- x[,2]
-    upr <- x[,3]
-    c(lwr_gt_0 = mean(lwr>0),
-      lwr_gt_s = mean(lwr>s),
-      lwr_gt_negs = mean(lwr>(-s)),
-      upr_gt_0 = mean(upr>0),
-      upr_gt_s = mean(upr>s),
-      upr_gt_negs = mean(upr>(-s)))
 }
 
 tabfun <- function(nsim, levNames=NULL, ...) {
