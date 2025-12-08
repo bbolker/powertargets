@@ -1,4 +1,5 @@
 ## This is powertargets (manually forked from bbmisc/sesoi)
+## https://github.com/bbolker/powertargets
 
 current: target
 -include target.mk
