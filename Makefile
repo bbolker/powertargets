@@ -23,6 +23,8 @@ Sources += $(wildcard Rmisc/*.*md Rmisc/*.R)
 shiny_powertargets:
 	Rscript --vanilla app.R
 
+Ignore += powertargets.pdf powertargets_files/
+
 powertargets.pdf: powertargets.qmd powertargets_funs.Rout
 	quarto render $< -t pdf -o $@
 
