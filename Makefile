@@ -12,7 +12,7 @@ vim_session:
 
 ## Clarity simulations
 
-Sources += *.R *.qmd *_notes.md
+Sources += *.R *.qmd *_notes.md README.md
 Ignore += *.html
 
 autopipeR = defined
@@ -22,6 +22,9 @@ Sources += $(wildcard Rmisc/*.*md Rmisc/*.R)
 
 shiny_powertargets:
 	Rscript --vanilla app.R
+
+powertargets.pdf: powertargets.qmd powertargets_funs.Rout
+	quarto render $< -t pdf -o $@
 
 powertargets.html: powertargets.qmd powertargets_funs.Rout
 	$(qr)
