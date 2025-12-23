@@ -113,10 +113,19 @@ tabfun <- function(..., s = 1, nsim = 10, fast = TRUE) {
 
 ## Okabe-Ito minus black and yellow
 oi3 <- palette.colors(9)[-c(1, 5)]
-out_colour_scale <- ggplot2::scale_colour_manual(name = "outcome category",
-                                                 values = oi3)
-out_fill_scale <- ggplot2::scale_fill_manual(name = "outcome category",
-                                             values = oi3)
+out_colour_scale <- function(y=NULL) {
+  ggplot2::scale_colour_manual(name = "outcome category",
+                               values = oi3,
+                               breaks = levels(y),
+                               labels = levels(y))
+}
+
+out_fill_scale <- function(y=NULL) {
+  ggplot2::scale_fill_manual(name = "outcome category",
+                             values = oi3,
+                             breaks = levels(y),
+                             labels = levels(y))
+}
 
 #' @examples
 #' set.seed(101)
@@ -128,6 +137,7 @@ out_fill_scale <- ggplot2::scale_fill_manual(name = "outcome category",
 plotfun <- function(x, expand = 0.05, stack = FALSE) {
   stopifnot(require("ggplot2"))
   stopifnot(require("directlabels"))
+  stopifnot(require("ggrepel"))
   gg0 <- ggplot(x, aes(n, value)) +
     scale_x_log10() +
     labs(y = "proportion", x = "sample size per group")
@@ -135,7 +145,7 @@ plotfun <- function(x, expand = 0.05, stack = FALSE) {
     gg1 <- gg0 +
       geom_line(aes(colour = name)) +
       geom_point(aes(colour = name))  +
-      out_colour_scale +
+      out_colour_scale(x$name) +
       expand_limits(y = 1 + expand)  ## make room for labels
     ## see https://tdhock.github.io/directlabels/docs/index.html
     ##  for direct labeling choices
@@ -147,7 +157,7 @@ plotfun <- function(x, expand = 0.05, stack = FALSE) {
                       colour = NA) +
       scale_x_continuous(expand = c(0,0)) +
       scale_y_continuous(expand = c(0,0)) +
-      out_fill_scale
+      out_fill_scale(x$name)
     )
     ## direct labeling: not quite working yet
     ##  (label positions switched?)
@@ -168,10 +178,10 @@ plotfun <- function(x, expand = 0.05, stack = FALSE) {
     dpos$label <- levels(x$name)[dpos$g]
     dpos$name <- levels(x$name)[dpos$g]
     ret <- gg1 +
-      geom_label(data = dpos,
+      geom_label_repel(data = dpos,
                  mapping = aes(x, y, label = label, colour=name),
                  fill = "white") +
-      out_colour_scale
+      out_colour_scale(x$name)
   }
   ret
 }

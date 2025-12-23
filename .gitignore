@@ -3,3 +3,8 @@ makestuff/
 .Rhistory
 target.mk
 *.html
+*.Rlog
+*.Rout
+*.rda
+*.Rout.pdf
+\.~*

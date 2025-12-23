@@ -70,7 +70,7 @@ print(ggplot(vf)
 	)
 	+ scale_y_discrete(limits = rev, labels=rev(vf$atext))
     + labs(x = "", y = "")
-    + out_colour_scale
+    + out_colour_scale(vf$pic)
 )
 ```
 
@@ -134,8 +134,13 @@ sim2 <- nsimfun(nvec, delta=1.5, nsim = 10000)
 plotfun(sim2)
 ```
 
+(Limiting this plot to $n \le 50$ so we have a hope of seeing what's happening ...)
+
 ```{r sim2-plot-2, fig.width = 8}
-plotfun(sim2, stack = TRUE)
+(sim2
+  |> filter(n <= 50)
+  |> plotfun(stack = TRUE)
+)
 ```
 
 ## session info

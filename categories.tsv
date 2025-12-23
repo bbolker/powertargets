@@ -1,11 +1,11 @@
-Num	lwr	upr	Short	Mag/Sign	Long
-1	1	1	LN	large/negative	clearly large and negative
-2	1	2	N	unclear/negative	clearly negative
-3	1	3	xLP	unclear/unclear	NOT (large and positive)
-4	1	4	Z	unclear/unclear	completely unclear
-5	2	2	SN	small/negative	clearly small and negative
-6	2	3	S	small/unclear	clearly small
-7	2	4	xLN	unclear/unclear	NOT (large and negative)
-8	3	3	SP	small/positive	clearly small/positive
-9	3	4	P	unclear/positive	clearly positive
-10	4	4	LP	large/positive	clearly large and positive
+Num	lwr	upr	Short	Mag/Sign	Long	power_trad	power_equivalence	type_S_error	type_M_error
+1	1	1	LN	large/negative	clearly large and negative	sig	nonequiv		
+2	1	2	N	unclear/negative	clearly negative	sig	nonequiv		
+3	1	3	xLP	unclear/unclear	NOT (large and positive)	nonsig	nonequiv		
+4	1	4	Z	unclear/unclear	completely unclear	nonsig	nonequiv		
+5	2	2	SN	small/negative	clearly small and negative	sig	equiv		
+6	2	3	S	small/unclear	clearly small	nonsig	equiv		
+7	2	4	xLN	unclear/unclear	NOT (large and negative)	nonsig	nonequiv		
+8	3	3	SP	small/positive	clearly small/positive	sig	equiv		
+9	3	4	P	unclear/positive	clearly positive	sig	nonequiv		
+10	4	4	LP	large/positive	clearly large and positive	sig	nonequiv		
