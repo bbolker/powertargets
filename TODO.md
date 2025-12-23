@@ -1,15 +1,15 @@
 
 ## Clarity categories
+
 * spreadsheet in `categories.tsv`
 * do we need to explicitly label categories? Alternatively, if we have sign and magnitude labeled, then most other categorizations can be computed ...
 
 ## graph/presentation fussing
+
 * add titles to plots based on attributes (carrying info about parameters) ?
 * work on category labels/worry about opposite-sign results
 	* Start in clarityFuns.R
 	* Need code for merging categories
-* tweak stacked plot: ordering and position of direct labels, etc.
-    * find centroid of regions explicitly, then plot labels there with self-avoiding labels (forget the package name ...) ?
 * make comparisons with power for sign detection, equivalence, non-inferiority ...
 * Shiny app
     * logarithmic spacing in sequence?
@@ -17,7 +17,7 @@
     * self-contained (no source()) ?
 * solve for n etc? (needs some thought about interface)
 
-
+## publication info
 
 * American Statistician
   * sharing policy https://authorservices-taylorandfrancis-com.libaccess.lib.mcmaster.ca/research-impact/sharing-versions-of-journal-articles/ (US$3650 to publish open access; otherwise, can post to institutional repository (MacSphere) with a 12-month embargo for Sci/Tech/Medicine, 18 months for Soc Sci/Humanities
