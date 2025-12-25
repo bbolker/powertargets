@@ -29,10 +29,10 @@ shiny_powertargets:
 
 Ignore += powertargets.pdf powertargets_files/
 
-powertargets.pdf: powertargets.qmd powertargets_funs.Rout
+powertargets.pdf: powertargets.qmd powertargets_funs.Rout  powertargets.bib
 	quarto render $< -t pdf -o $@
 
-powertargets.html: powertargets.qmd powertargets_funs.Rout
+powertargets.html: powertargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
 ## This is how you put things into a pipeR pipeline without updating them.
