@@ -124,8 +124,6 @@ Alternatively:
 plotfun(sim1, stack = TRUE)
 ```
 
-(have to work out how to do direct labeling ... see [here](https://stackoverflow.com/questions/10393956/add-direct-labels-to-ggplot2-geom-area-chart) ? set 'expand' to zero so coloured regions fill the whole plot area ...
-
 ### Simulations with $\delta=1.5$, $s=1$, varying $n$
 
 What if we make the true effect size greater than the SESOI?
