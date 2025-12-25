@@ -1,5 +1,6 @@
 ## This is powertargets (manually forked from bbmisc/sesoi)
 ## https://github.com/bbolker/powertargets
+all: docs/powertargets.html
 
 current: target
 -include target.mk
@@ -19,6 +20,9 @@ autopipeR = defined
 
 Ignore += Rmisc/*.html
 Sources += $(wildcard Rmisc/*.*md Rmisc/*.R)
+
+docs/powertargets.html: powertargets.html
+	mv powertargets.html docs/
 
 shiny_powertargets:
 	Rscript --vanilla app.R

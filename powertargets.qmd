@@ -6,7 +6,8 @@ format:
   html:
     embed-resources: true
     code-fold: true
-bibliography: powertargets.bib    
+bibliography: powertargets.bib
+nocite: '@*'
 ---
 
 (Source code is in [this directory](https://github.com/bbolker/powertargets)
