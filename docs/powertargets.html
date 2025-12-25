@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ben Bolker and Jonathan Dushoff">
-<meta name="dcterms.date" content="2025-12-23">
+<meta name="dcterms.date" content="2025-12-25">
 
 <title>disaggregating clarity of statistical results</title>
 <style>
@@ -2336,7 +2336,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 23, 2025</p>
+      <p class="date">December 25, 2025</p>
     </div>
   </div>
   
@@ -2360,6 +2360,11 @@ window.Quarto = {
 <p>Simulate a <span class="math inline">\(t\)</span>-test-like comparison: what is the distribution of outcomes?</p>
 <p>The relevant parameters:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 32%">
+<col style="width: 32%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>param</th>
@@ -2371,7 +2376,7 @@ window.Quarto = {
 <tr class="odd">
 <td><span class="math inline">\(s\)</span></td>
 <td>1</td>
-<td>SESOI (“smallest effect size of interest”)</td>
+<td>SESOI (“smallest effect size of interest”), clinically meaningful difference</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\delta\)</span></td>
@@ -2381,7 +2386,7 @@ window.Quarto = {
 <tr class="odd">
 <td><span class="math inline">\(\sigma\)</span></td>
 <td>1</td>
-<td>SESOI (“smallest effect size of interest”)</td>
+<td>standard error</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\alpha\)</span></td>
@@ -2395,7 +2400,7 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>We are classifying outcomes in the following way (from <a href="https://dushoff.github.io/ResearchSandbox/clarStrength.Rout.pdf">here</a>/<a href="https://github.com/dushoff/ResearchSandbox/blob/main/clarStrength.R">here</a>):</p>
+<p>We are classifying outcomes in the following way (from <a href="https://dushoff.github.io/ResearchSandbox/clarStrength.Rout.pdf">here</a>/<a href="https://github.com/dushoff/ResearchSandbox/blob/main/clarStrength.R">here</a>), assuming a positive estimate (symmetric equivalents of all cases except “completely unclear” are possible).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2520,13 +2525,6 @@ Should have\ndone a power\nanalysis first
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sim1 <span class="ot">&lt;-</span> <span class="fu">nsimfun</span>(nvec, <span class="at">nsim =</span>  <span class="dv">10000</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plotfun</span>(sim1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
-ℹ Please use tidy evaluation idioms with `aes()`.
-ℹ See also `vignette(&quot;ggplot2-in-packages&quot;)` for more information.
-ℹ The deprecated feature was likely used in the directlabels package.
-  Please report the issue at &lt;https://github.com/tdhock/directlabels/issues&gt;.</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2539,7 +2537,7 @@ Should have\ndone a power\nanalysis first
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotfun</span>(sim1, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotfun</span>(sim1, <span class="at">stack =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -2557,8 +2555,8 @@ Should have\ndone a power\nanalysis first
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sim2 <span class="ot">&lt;-</span> <span class="fu">nsimfun</span>(nvec, <span class="at">delta=</span><span class="fl">1.5</span>, <span class="at">nsim =</span> <span class="dv">10000</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotfun</span>(sim2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sim2 <span class="ot">&lt;-</span> <span class="fu">nsimfun</span>(nvec, <span class="at">delta=</span><span class="fl">1.5</span>, <span class="at">nsim =</span> <span class="dv">10000</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotfun</span>(sim2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -2572,10 +2570,10 @@ Should have\ndone a power\nanalysis first
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(sim2</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&lt;=</span> <span class="dv">50</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|&gt;</span> <span class="fu">plotfun</span>(<span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(sim2</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|&gt;</span> <span class="fu">filter</span>(n <span class="sc">&lt;=</span> <span class="dv">50</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|&gt;</span> <span class="fu">plotfun</span>(<span class="at">stack =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -2591,7 +2589,7 @@ Should have\ndone a power\nanalysis first
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>R Under development (unstable) (2025-12-22 r89219)
