@@ -1,6 +1,6 @@
 ## This is powertargets (manually forked from bbmisc/sesoi)
 ## https://github.com/bbolker/powertargets
-all: docs/powertargets.html
+all: powertargets.html
 
 current: target
 -include target.mk
@@ -21,9 +21,6 @@ autopipeR = defined
 Ignore += Rmisc/*.html
 Sources += $(wildcard Rmisc/*.*md Rmisc/*.R)
 
-docs/powertargets.html: powertargets.html
-	mv powertargets.html docs/
-
 shiny_powertargets:
 	Rscript --vanilla app.R
 
@@ -32,6 +29,9 @@ Ignore += powertargets.pdf powertargets_files/
 powertargets.pdf: powertargets.qmd powertargets_funs.Rout  powertargets.bib
 	quarto render $< -t pdf -o $@
 
+## To make and stage the docs version, please use target below.
+## This avoids automatic churn
+## powertargets.html.docs: powertargets.qmd
 powertargets.html: powertargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
