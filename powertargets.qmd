@@ -121,7 +121,10 @@ plotfun(sim1)
 Alternatively:
 
 ```{r sim1-plot-stack, fig.width = 8, message = FALSE}
-plotfun(sim1, stack = TRUE)
+(sim1
+  |> filter(n <= 100)
+  |> plotfun(sim1, stack = TRUE)
+)
 ```
 
 ### Simulations with $\delta=1.5$, $s=1$, varying $n$

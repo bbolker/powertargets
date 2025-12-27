@@ -155,7 +155,7 @@ plotfun <- function(x, expand = 0.05, stack = FALSE) {
     gg1 <- suppressMessages(
       gg0 + geom_area(aes(fill = name), position = "stack",
                       colour = NA) +
-      scale_x_continuous(expand = c(0,0)) +
+      scale_x_log10(expand = c(0,0)) +
       scale_y_continuous(expand = c(0,0)) +
       out_fill_scale(x$name)
     )
@@ -168,7 +168,8 @@ plotfun <- function(x, expand = 0.05, stack = FALSE) {
           ## we want (somewhere near) the middle element
           w <- round(mean(which(ymax-ymin > (0.8*max(ymax-ymin))),
                           na.rm = TRUE))
-          data.frame(g = group[1], x = x[w], y = (ymin[w] + ymax[w])/2)
+          ## need 10^x if we use scale_x_log10
+          data.frame(g = group[1], x = 10^(x[w]), y = (ymin[w] + ymax[w])/2)
         })
       }
       dpos <- bb |>
@@ -181,7 +182,8 @@ plotfun <- function(x, expand = 0.05, stack = FALSE) {
       geom_label_repel(data = dpos,
                  mapping = aes(x, y, label = label, colour=name),
                  fill = "white") +
-      out_colour_scale(x$name)
+      out_colour_scale(x$name) +
+      theme(legend.position = "none")
   }
   ret
 }
