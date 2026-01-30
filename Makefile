@@ -35,6 +35,9 @@ powertargets.pdf: powertargets.qmd powertargets_funs.Rout  powertargets.bib
 powertargets.html: powertargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
+moretargets.html: moretargets.qmd powertargets_funs.Rout powertargets.bib
+	$(qr)
+
 ## wrapR is how you put old code into a pipeR pipeline; use sparingly
 powertargets_funs.Rout: powertargets_funs.R
 	$(wrapR)
@@ -47,6 +50,8 @@ simfun2_test.Rout: simfun2_test.R powertargets_funs.rda
 ## claritySims.Rout: claritySims.R clarityFuns.R
 claritySims.Rout: claritySims.R clarityFuns.rda categories.tsv
 	$(pipeR)
+
+powertargets.Rout: powertargets.R
 
 ######################################################################
 
