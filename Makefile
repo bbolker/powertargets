@@ -35,11 +35,13 @@ powertargets.pdf: powertargets.qmd powertargets_funs.Rout  powertargets.bib
 powertargets.html: powertargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
-## This is how you put things into a pipeR pipeline without updating them.
+## wrapR is how you put old code into a pipeR pipeline; use sparingly
 powertargets_funs.Rout: powertargets_funs.R
 	$(wrapR)
 
-simfun2_test.Rout: simfun2_test.R powertargets_funs.Rout
+## Fixed rule 2026 Jan 30 (Fri) (modern dependency for modern recipe)
+## Something else is broken
+simfun2_test.Rout: simfun2_test.R powertargets_funs.rda
 
 ## claritySims.md
 ## claritySims.Rout: claritySims.R clarityFuns.R
