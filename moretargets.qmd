@@ -1,3 +1,4 @@
+
 ---
 title: disaggregating clarity of statistical results
 date: today
@@ -75,15 +76,6 @@ print(ggplot(vf)
 )
 ```
 
-As an example, we'll start by determining the sample size to needed to get 80% power for a cutoff/SESOI value (`s` in the underlying code) with a standard deviation of 1:
-
-```{r pow1}
-pp <- power.t.test(delta = 1, sd = 1, power = 0.8)
-n <- ceiling(pp$n)  ## 17
-tt <- power.t.test(delta = 1, sd = 1, n = n)
-pow1 <- round(tt$power,3) ## 0.807
-```
-
 With per-sample $n$ of `r n` (and with $\delta=1$, $\sigma=1$, $\alpha=0.05$)  we get a power of `r pow1`.
 
 If we simulate 10,000 such experiments, here is the breakdown of different outcomes:
@@ -109,7 +101,7 @@ tt1 <- tabfun(n=200, nsim = 10000)
 print(tt1)
 ```
 
-### Simulations with $\delta=0.5$, $s=1$, varying $n$
+### Simulations with $\delta=1.5$, $s=1$, varying $n$
 
 ```{r sim1-plot, fig.width = 8, message = FALSE}
 set.seed(101)
@@ -127,23 +119,6 @@ Alternatively:
 )
 ```
 
-### Simulations with $\delta=1.5$, $s=1$, varying $n$
-
-What if we make the true effect size greater than the SESOI?
-
-```{r sim2-plot, fig.width = 8}
-sim2 <- nsimfun(nvec, delta=1.5, nsim = 10000)
-plotfun(sim2)
-```
-
-(Limiting this plot to $n \le 50$ so we have a hope of seeing what's happening ...)
-
-```{r sim2-plot-2, fig.width = 8}
-(sim2
-  |> filter(n <= 50)
-  |> plotfun(stack = TRUE)
-)
-```
 
 ## session info
 
