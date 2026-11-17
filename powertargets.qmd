@@ -10,7 +10,7 @@ bibliography: powertargets.bib
 nocite: '@*'
 ---
 
-(Source code is in [this directory](https://github.com/bbolker/powertargets)
+(Source code is in [this directory](https://github.com/bbolker/powertargets))
 
 ```{r setup, message = FALSE}
 library(tidyverse)
