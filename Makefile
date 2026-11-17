@@ -40,6 +40,7 @@ powertargets.html: powertargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
 ## Probably in progress, probably JD
+Ignore += moretargets.pdf moretargets_files/
 moretargets.html: moretargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
