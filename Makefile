@@ -35,6 +35,7 @@ powertargets.pdf: powertargets.qmd powertargets_funs.Rout  powertargets.bib
 powertargets.html: powertargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
+## Probably in progress, probably JD
 moretargets.html: moretargets.qmd powertargets_funs.Rout powertargets.bib
 	$(qr)
 
