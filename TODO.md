@@ -1,3 +1,7 @@
+## new
+
+* Look at power excluding wrong-sign outcomes
+* JD: figure out what's up with `moretargets.qmd`
 
 ## Clarity categories
 
@@ -28,5 +32,4 @@
      * Questions to https://macsphere.mcmaster.ca/feedback
  * from [aims and scope](https://www-tandfonline-com.libaccess.lib.mcmaster.ca/journals/utas20/about-this-journal#aims-and-scope): General section includes "commentaries, or informative essays, that provide viewpoints and perspective on statistical topics of general interest (these are similar in spirit to Letters to the Editor but involve longer discussions of background, issues, and perspective);"
  * [instructions for authors](https://www-tandfonline-com.libaccess.lib.mcmaster.ca/action/authorSubmission?show=instructions&journalCode=utas20)
-
-
+    
