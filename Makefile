@@ -11,6 +11,10 @@ vim_session:
 
 ######################################################################
 
+Sources += Makefile .gitignore
+
+######################################################################
+
 ## Clarity simulations
 
 Sources += *.R *.qmd *_notes.md README.md
@@ -61,8 +65,6 @@ qr = quarto render $<
 ######################################################################
 
 ### Makestuff
-
-Sources += Makefile
 
 Ignore += makestuff
 msrepo = https://github.com/dushoff
